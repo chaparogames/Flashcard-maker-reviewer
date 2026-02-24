@@ -1,0 +1,7 @@
+# Flashcard App Requirements
+
+# Python standard library only (no external packages required for basic functionality)
+
+# Future additional features may require the following::
+# pyttsx3==2.90  # For text-to-speech
+# pillow==10.0.0  # For image support
