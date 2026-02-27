@@ -1,4 +1,4 @@
-from Flashcards.Flashcard_Creation import welcome, load_flashcards, create_flashcard, main_menu
+from Flashcard_Creation import welcome, load_flashcards, create_flashcard, main_menu
 import os
 
 welcome()
@@ -7,16 +7,34 @@ while True:
     os.system('cls' if os.name == 'nt' else 'clear')
     choice = input(main_menu())
     if choice == "1":
+        print("-"*30)
         create_flashcard()
     elif choice == "2":
         flashcards = load_flashcards(filename="flashcards.json")
         if not flashcards:
             print("No flashcards found. Please create some first.")
         else:
-            print("You're flashcards:")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            study_by_category = input("Would you like to study by category? (Enter 'Category' or 'all'): ").lower()
+            if study_by_category == 'category':
+                categories = set(card['Category'] for card in flashcards)
+                print("Available categories:", ', '.join(categories))
+                selected_category = input("Enter the category you want to study: ")
+                selected_cards = [card for card in flashcards if card.get('Category', 'Unknown') == selected_category]
+                if not selected_cards:
+                    print(f"No flashcards found for category: '{selected_category}'. Please try again.")
+                    continue
+            elif study_by_category == 'all':
+                print("Studying all Flashcards.")
+                selected_cards = flashcards
+            else:
+                print("Invalid input. Please enter 'Category' or 'All'.")
+                continue
+            print("Your flashcards:")
             review_later_cards = []
-            for card in flashcards:
+            for card in selected_cards:
                 print("-"*20)
+                print(f"Category: {card['Category']}")
                 print(f"Front: {card['front']}")
                 input("Your answer?: ")
                 print(f"Back: {card['back']}")
@@ -62,7 +80,7 @@ while True:
             "\nAll your flashcards:"
             )
             for card in flashcards:
-                print(f"Front: {card['front']}| Back: {card['back']}")
+                print(f"Category: {card['Category']}, Front: {card['front']}| Back: {card['back']}")
         input(("-"*20) + "\nPress ENTER to return to the main menu...")
     elif choice == "4":
         print("Thanks for studying with us! Goodbye!")

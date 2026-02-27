@@ -2,6 +2,7 @@
 
 1. Strength based review listing (Poor, Okay, Good, Great) and have each either timed or reviewed more
 2. Better organization (Subject, topic difficulty) options for users
+    Implemented... Asks users if they want to create categorized cards
 3. Hints or explanations for the cards
 4. Import/Export cards
 5. User Profiles
