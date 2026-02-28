@@ -1,3 +1,5 @@
 /flashcards.json
 /flashcards.txt
-pycache/
+__pycache__/
+venv/
+appsimpletest.py
